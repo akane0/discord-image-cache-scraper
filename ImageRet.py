@@ -3,7 +3,7 @@ import shutil
 import errno
 from datetime import date
 
-def CreateDirectories(): # eventually add specific folders for dates
+def CreateDirectories():
 
     today = date.today().isoformat()
     path = os.getcwd()
@@ -51,7 +51,7 @@ def CopyFiles(discord_path, temp_dir, image_dir):
 
     for file in files:
         if file in file_blacklist:
-            continue
+            print("File already exists")
         else:
 
             src = r"{}\{}".format(discord_path, file)
@@ -69,12 +69,19 @@ def ConvertFiles(temp_dir, image_dir):
     files = os.listdir(temp_dir)
 
     for file in files:
-        src = temp_dir + "\\" + file
-        dest = image_dir + "\\" + file + ".png"
 
-        print("Coverting file %s" % file)
+        if ".png" not in file:
+            dest = image_dir + "\\" + file + ".png"
+            print("Coverting file %s to png" % file)
+        else:
+            dest = image_dir + "\\" + file
+            print("File %s is already png" % file)
+
+        src = temp_dir + "\\" + file
 
         shutil.move(src, dest)
+
+    print("Finished conversion")
 
 
 def main():
