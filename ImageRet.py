@@ -96,7 +96,9 @@ def main():
 
     ConvertFiles(temp_dir, image_dir)
 
-    print("Finished transfer and conversion.")
+    print("Finished transfer and conversion.\n")
+
+    input("Press Enter to close...")
 
 
 if __name__ == "__main__":
